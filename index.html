@@ -198,7 +198,6 @@ nav { flex:1; display:flex; justify-content:center; }
 .menu li a:hover { color: var(--white); background: rgba(255,255,255,.1); }
 .menu li a.active { color: var(--teal-200); font-weight: 500; }
 
-/* Header CTA — apenas no desktop */
 .header-cta {
   flex-shrink: 0;
   background: var(--teal-400);
@@ -212,7 +211,6 @@ nav { flex:1; display:flex; justify-content:center; }
 }
 .header-cta:hover { background: var(--teal-200); color: var(--teal-800); }
 
-/* Hamburger */
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -231,7 +229,6 @@ nav { flex:1; display:flex; justify-content:center; }
   transition: var(--ease);
 }
 
-/* Mobile Nav */
 .mobile-nav {
   display: none;
   position: fixed;
@@ -524,8 +521,6 @@ nav { flex:1; display:flex; justify-content:center; }
   line-height: 1.88;
   margin-bottom: 12px;
 }
-/* REMOVIDO: btn-primary dentro de atend-text — CTA só no Hero e Localização */
-
 .atend-cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -615,9 +610,8 @@ nav { flex:1; display:flex; justify-content:center; }
 }
 .trat-card:hover .trat-content p { max-height:200px; opacity:1; }
 
-
 /* ═══════════════════════════════════════
-   ARTIGOS MODELO SOLTO
+   ARTIGOS MODELO SOLTO (Com Imagens)
 ═══════════════════════════════════════ */
 .artigos-section {
   position:relative;
@@ -638,21 +632,50 @@ nav { flex:1; display:flex; justify-content:center; }
 .artigos-grid {
   display:grid;
   grid-template-columns: repeat(2,1fr);
-  gap:18px;
+  gap: 22px;
 }
 .card-artigo {
   background: rgba(255,255,255,.07);
   border: 1px solid rgba(255,255,255,.1);
   border-radius: var(--radius-lg);
-  padding: 30px 26px;
-  display:flex; flex-direction:column; gap:12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Para a foto não vazar as bordas arredondadas */
   transition: var(--ease);
 }
 .card-artigo:hover {
   background: rgba(255,255,255,.11);
   transform: translateY(-4px);
   border-color: rgba(126,211,200,.3);
+  box-shadow: var(--shadow-lg);
 }
+
+/* Área da foto no card */
+.artigo-img-wrapper {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+.artigo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.card-artigo:hover .artigo-img {
+  transform: scale(1.06); /* Efeito de zoom suave ao passar o mouse */
+}
+
+/* Conteúdo de texto do card */
+.artigo-content-wrapper {
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+}
+
 .artigo-tag {
   display:inline-block;
   background: rgba(42,173,160,.25);
@@ -663,7 +686,7 @@ nav { flex:1; display:flex; justify-content:center; }
 }
 .titulo-artigo {
   font-family:var(--font-display);
-  font-size:1.35rem; font-weight:400;
+  font-size:1.4rem; font-weight:400;
   color:var(--white); line-height:1.25;
 }
 .conteudo-artigo {
@@ -677,6 +700,7 @@ nav { flex:1; display:flex; justify-content:center; }
   font-size:.83rem; font-weight:500;
   cursor:pointer; padding:0; transition:var(--ease);
   font-family:var(--font-body); align-self:flex-start;
+  margin-top: auto; /* Empurra o botão sempre para o fundo */
 }
 .leia-mais-btn:hover { color:var(--white); gap:12px; }
 
@@ -698,13 +722,24 @@ nav { flex:1; display:flex; justify-content:center; }
   border-radius:var(--radius-xl);
   padding:44px 36px 36px;
   max-width:600px; width:100%;
-  max-height:82vh; overflow-y:auto;
+  max-height:86vh; overflow-y:auto;
   animation:modalIn .3s ease;
 }
 @keyframes modalIn {
   from { opacity:0; transform:scale(.93) translateY(14px); }
   to   { opacity:1; transform:scale(1) translateY(0); }
 }
+
+/* Imagem dentro do modal */
+.modal-img-display {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  margin-bottom: 22px;
+  box-shadow: var(--shadow-sm);
+}
+
 .close-btn {
   position:absolute; top:14px; right:14px;
   background:rgba(255,255,255,.08); border:none;
@@ -712,6 +747,7 @@ nav { flex:1; display:flex; justify-content:center; }
   width:34px; height:34px; border-radius:50%;
   cursor:pointer; display:flex; align-items:center; justify-content:center;
   transition:var(--ease);
+  z-index: 10;
 }
 .close-btn:hover { background:rgba(255,255,255,.16); color:var(--white); }
 .modal-tag {
@@ -739,7 +775,7 @@ nav { flex:1; display:flex; justify-content:center; }
 }
 
 /* ═══════════════════════════════════════
-   LOCALIZAÇÃO — layout corrigido
+   LOCALIZAÇÃO
 ═══════════════════════════════════════ */
 .localizacao-section {
   background: var(--teal-900);
@@ -761,7 +797,6 @@ nav { flex:1; display:flex; justify-content:center; }
 .loc-item strong { display:block; color:var(--white); font-size:.88rem; font-weight:500; margin-bottom:2px; }
 .loc-item span { font-size:.82rem; color:rgba(255,255,255,.58); line-height:1.6; }
 
-/* Mapa — altura fixa, borda no topo */
 .loc-mapa {
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   overflow: hidden;
@@ -775,7 +810,7 @@ nav { flex:1; display:flex; justify-content:center; }
 }
 
 /* ═══════════════════════════════════════
-   FOOTER — sem logo e sem botão extra
+   FOOTER
 ═══════════════════════════════════════ */
 .footer { background: var(--teal-900); }
 
@@ -927,12 +962,13 @@ nav { flex:1; display:flex; justify-content:center; }
   .stat-num { font-size:1.55rem; }
   .trat-card { height:300px; }
   .modal-content { padding:32px 20px; }
+  .artigo-img-wrapper { height: 180px; }
+  .modal-img-display { height: 200px; }
 }
 </style>
 </head>
 <body>
 
-<!-- ══ HEADER ══ -->
 <header id="header">
   <div class="header-inner">
     <a href="#inicio" class="logo-link">
@@ -959,9 +995,8 @@ nav { flex:1; display:flex; justify-content:center; }
   </div>
 </header>
 
-<!-- ── Mobile Nav ── -->
 <div class="mobile-nav" id="mobileNav">
-  <button class="mobile-close" id="mobileClose" aria-label="Fechar menu">&#x2715;</button>
+  <button class="mobile-close" id="mobileClose" aria-label="Fechar menu">✕</button>
   <ul>
     <li><a href="#inicio"      onclick="closeMobile()">Início</a></li>
     <li><a href="#sobre"       onclick="closeMobile()">Sobre</a></li>
@@ -972,7 +1007,6 @@ nav { flex:1; display:flex; justify-content:center; }
   </ul>
 </div>
 
-<!-- ══ HERO ══ -->
 <section id="inicio" class="hero-section">
   <div class="hero-overlay"></div>
   <div class="hero-shape shape-1"></div>
@@ -1002,13 +1036,11 @@ nav { flex:1; display:flex; justify-content:center; }
   </div>
 </section>
 
-<!-- ══ SOBRE ══ -->
 <section id="sobre" class="sobre-section">
   <div class="sobre-bg-deco"></div>
   <div class="container">
     <div class="section-label">Sobre o Médico</div>
     <div class="sobre-grid">
-      <!-- Coluna foto -->
       <div class="sobre-foto-col">
         <div class="foto-frame">
           <img src="./img/fotoDR.jpeg" alt="Dr. Wilfredo Finck Jr." class="doctor-photo">
@@ -1036,7 +1068,6 @@ nav { flex:1; display:flex; justify-content:center; }
           </div>
         </div>
       </div>
-      <!-- Coluna texto -->
       <div class="sobre-text-col">
         <h2 class="section-title">Quem é o<br><em>Dr. Wilfredo Finck Jr.?</em></h2>
         <p class="sobre-intro">Com mais de 30 anos de trajetória médica e uma vida dedicada ao cuidado humano, o Dr. Wilfredo Finck Jr. é referência em psiquiatria clínica em São José dos Campos.</p>
@@ -1076,7 +1107,6 @@ nav { flex:1; display:flex; justify-content:center; }
   </div>
 </section>
 
-<!-- ══ ATENDIMENTO ══ -->
 <section id="atendimento" class="atendimento-section">
   <div class="container">
     <div class="atendimento-grid">
@@ -1120,7 +1150,6 @@ nav { flex:1; display:flex; justify-content:center; }
   </div>
 </section>
 
-<!-- ══ TRATAMENTOS ══ -->
 <section id="tratamentos" class="tratamentos-section">
   <div class="container">
     <div class="section-label">Especialidades</div>
@@ -1160,99 +1189,179 @@ nav { flex:1; display:flex; justify-content:center; }
         <div class="trat-content"><div class="trat-num"></div><h3>Dependência Química</h3><p>Abordagem multidisciplinar para superar o vício em substâncias, com respeito e sem julgamento.</p></div>
       </div>
       <div class="trat-card trat-card--geriatria" style="background-image:url('https://img.freepik.com/fotos-gratis/casal-de-idosos-sorridente-e-feliz-passando-tempo-juntos_23-2148962354.jpg?semt=ais_hybrid')">
-        <div class="trat-overlay"></div>
-        <div class="trat-content">
+        <div class="trat-overlay"></div>
+        <div class="trat-content">
           <div class="trat-num"></div>
           <h3>Psiquiatria Geriátrica</h3>
           <p>Cuidado especializado em saúde mental de idosos — depressão, demência e Alzheimer — promovendo qualidade de vida na terceira idade.</p>
         </div>
-      </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ══ ARTIGOS ══ -->
 <section id="artigos" class="artigos-section">
   <div class="artigos-bg-deco"></div>
   <div class="container">
     <div class="section-label">Reflexões</div>
     <h2 class="section-title">Artigos do <em>Dr. Wilfredo</em></h2>
     <p class="section-subtitle">Pensamentos e reflexões sobre saúde mental, vida e bem-estar, escritos pelo próprio Dr. Wilfredo Finck Jr.</p>
+    
     <div class="artigos-grid">
       <div class="card-artigo">
-        <div class="artigo-tag">Filosofia de vida</div>
-        <h3 class="titulo-artigo">A Jornada Invisível da Evolução</h3>
-        <p class="conteudo-artigo">Na existência, não há derrotas — há apenas etapas. Cada uma nos molda de maneira única, revelando-se não como sofrimento, mas como amadurecimento...</p>
-        <button class="leia-mais-btn" data-artigo="artigo1">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        <div class="artigo-img-wrapper">
+          <img src="./img/fotoOlhandoPaisagem.jpeg" alt="A Jornada Invisível" class="artigo-img">
+        </div>
+        <div class="artigo-content-wrapper">
+          <div class="artigo-tag">Filosofia de vida</div>
+          <h3 class="titulo-artigo">A Jornada Invisível da Evolução</h3>
+          <p class="conteudo-artigo">Na existência, não há derrotas — há apenas etapas. Cada uma nos molda de maneira única, revelando-se não como sofrimento, mas como amadurecimento...</p>
+          <button class="leia-mais-btn" data-artigo="artigo1">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        </div>
       </div>
+      
       <div class="card-artigo">
-        <div class="artigo-tag">Saúde Mental</div>
-        <h3 class="titulo-artigo">Depressão</h3>
-        <p class="conteudo-artigo">Uma tristeza inexplicável, a melancolia da alma, uma sensação de vazio interior e desesperança. Muitos sofrem desnecessariamente por não buscarem ajuda...</p>
-        <button class="leia-mais-btn" data-artigo="artigo2">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        <div class="artigo-img-wrapper">
+          <img src="./img/fotoPensamentoBaguncado.jpeg" alt="Depressão" class="artigo-img">
+        </div>
+        <div class="artigo-content-wrapper">
+          <div class="artigo-tag">Saúde Mental</div>
+          <h3 class="titulo-artigo">Depressão</h3>
+          <p class="conteudo-artigo">Uma tristeza inexplicável, a melancolia da alma, uma sensação de vazio interior e desesperança. Muitos sofrem desnecessariamente por não buscarem ajuda...</p>
+          <button class="leia-mais-btn" data-artigo="artigo2">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        </div>
       </div>
+      
       <div class="card-artigo">
-        <div class="artigo-tag">Bem-estar</div>
-        <h3 class="titulo-artigo">O Tempo</h3>
-        <p class="conteudo-artigo">O sorriso de hoje não volta mais! A boa conversa, os momentos com amigos e família são únicos. Devemos carregar menos e curtir mais...</p>
-        <button class="leia-mais-btn" data-artigo="artigo3">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        <div class="artigo-img-wrapper">
+          <img src="./img/fotoOlhandoPaisagemCidade.jpeg" alt="O Tempo" class="artigo-img">
+        </div>
+        <div class="artigo-content-wrapper">
+          <div class="artigo-tag">Bem-estar</div>
+          <h3 class="titulo-artigo">O Tempo</h3>
+          <p class="conteudo-artigo">O sorriso de hoje não volta mais! A boa conversa, os momentos com amigos e família são únicos. Devemos carregar menos e curtir mais...</p>
+          <button class="leia-mais-btn" data-artigo="artigo3">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        </div>
       </div>
+      
       <div class="card-artigo">
-        <div class="artigo-tag">Crescimento</div>
-        <h3 class="titulo-artigo">Gratidão</h3>
-        <p class="conteudo-artigo">Os valores da vida são pouco observados quando chegam de forma facilitada. A gratidão é a dádiva que nos proporciona felicidade e resistência...</p>
-        <button class="leia-mais-btn" data-artigo="artigo4">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        <div class="artigo-img-wrapper">
+          <img src="./img/fotoRespiroCalmo.jpeg" alt="Gratidão" class="artigo-img">
+        </div>
+        <div class="artigo-content-wrapper">
+          <div class="artigo-tag">Crescimento</div>
+          <h3 class="titulo-artigo">Gratidão</h3>
+          <p class="conteudo-artigo">Os valores da vida são pouco observados quando chegam de forma facilitada. A gratidão é a dádiva que nos proporciona felicidade e resistência...</p>
+          <button class="leia-mais-btn" data-artigo="artigo4">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        </div>
       </div>
+      
       <div class="card-artigo">
-        <div class="artigo-tag">Reflexão</div>
-        <h3 class="titulo-artigo">A Reconquista do Valor Interno</h3>
-        <p class="conteudo-artigo">O ser humano não nasceu para ser medido, mas para ser vivido. Houve um tempo em que a existência era direta: o corpo sentia o frio e a roupa era abrigo; a fome surgia e o alimento era sustento. A vida...</p>
-        <button class="leia-mais-btn" data-artigo="artigo5">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        <div class="artigo-img-wrapper">
+          <img src="./img/fotoEvolucaoInt.jpeg" alt="Valor Interno" class="artigo-img">
+        </div>
+        <div class="artigo-content-wrapper">
+          <div class="artigo-tag">Reflexão</div>
+          <h3 class="titulo-artigo">A Reconquista do Valor Interno</h3>
+          <p class="conteudo-artigo">O ser humano não nasceu para ser medido, mas para ser vivido. Houve um tempo em que a existência era direta: o corpo sentia o frio e a roupa era abrigo...</p>
+          <button class="leia-mais-btn" data-artigo="artigo5">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        </div>
       </div>
+      
       <div class="card-artigo">
-        <div class="artigo-tag">Saúde Mental</div>
-        <h3 class="titulo-artigo">A Arte de Contemplar</h3>
-        <p class="conteudo-artigo">Você não está cansado — está desconectado. Contemplar não é só olhar. É parar. É sair, por um instante, da pressa e da lógica do dia a dia. É olhar sem querer resolver, entender ou usar. E, nesse momento, algo muda. A mente desacelera...</p> 
-        <button class="leia-mais-btn" data-artigo="artigo6">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        <div class="artigo-img-wrapper">
+          <img src="./img/fotoPensamentoBaguncado.jpeg" alt="Contemplar" class="artigo-img">
+        </div>
+        <div class="artigo-content-wrapper">
+          <div class="artigo-tag">Saúde Mental</div>
+          <h3 class="titulo-artigo">A Arte de Contemplar</h3>
+          <p class="conteudo-artigo">Você não está cansado — está desconectado. Contemplar não é só olhar. É parar. É sair, por um instante, da pressa e da lógica do dia a dia...</p> 
+          <button class="leia-mais-btn" data-artigo="artigo6">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        </div>
       </div>
+      
       <div class="card-artigo">
-        <div class="artigo-tag">Relacionamentos</div>
-        <h3 class="titulo-artigo">O que sustenta uma vida em comum</h3>
-        <p class="conteudo-artigo">Amor, humildade e perdão. Mais do que virtudes, são fundamentos silenciosos da vida em comum. Sustentam aquilo que não aparece, mas determina a qualidade das relações...</p> 
-        <button class="leia-mais-btn" data-artigo="artigo7">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        <div class="artigo-img-wrapper">
+          <img src="./img/fotoOlhandoGarrafa.jpeg" alt="Vida em comum" class="artigo-img">
+        </div>
+        <div class="artigo-content-wrapper">
+          <div class="artigo-tag">Relacionamentos</div>
+          <h3 class="titulo-artigo">O que sustenta uma vida em comum</h3>
+          <p class="conteudo-artigo">Amor, humildade e perdão. Mais do que virtudes, são fundamentos silenciosos da vida em comum. Sustentam aquilo que não aparece, mas determina a qualidade...</p> 
+          <button class="leia-mais-btn" data-artigo="artigo7">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        </div>
       </div>
+      
       <div class="card-artigo">
-        <div class="artigo-tag">Dependência Química</div>
-        <h3 class="titulo-artigo">Alcoolismo: Quando o Alívio Vira Dependência</h3>
-        <p class="conteudo-artigo">Raramente o álcool entra na vida de alguém como problema. Ele chega como resposta — não como prazer, mas como alívio. Antes de ser dependência, costuma parecer solução...</p> 
-        <button class="leia-mais-btn" data-artigo="artigo8">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        <div class="artigo-img-wrapper">
+          <img src="./img/fotoPensamentoBaguncado.jpeg" alt="Dependência Química" class="artigo-img">
+        </div>
+        <div class="artigo-content-wrapper">
+          <div class="artigo-tag">Dependência Química</div>
+          <h3 class="titulo-artigo">Alcoolismo: Quando o Alívio Vira Dependência</h3>
+          <p class="conteudo-artigo">Raramente o álcool entra na vida de alguém como problema. Ele chega como resposta — não como prazer, mas como alívio. Antes de ser dependência...</p> 
+          <button class="leia-mais-btn" data-artigo="artigo8">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        </div>
       </div>
+      
       <div class="card-artigo">
-        <div class="artigo-tag">Saúde Mental</div>
-        <h3 class="titulo-artigo">Ansiedade: O circuito que não repousa</h3>
-        <p class="conteudo-artigo">Há um lugar de silêncio e quietude além do físico. Mas, para algumas pessoas, esse lugar não é facilmente acessado. A mente não descansa. Mesmo em ambientes tranquilos, permanece ativa...</p> 
-        <button class="leia-mais-btn" data-artigo="artigo9">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        <div class="artigo-img-wrapper">
+          <img src="./img/fotoPensamentoBaguncado.jpeg" alt="Ansiedade" class="artigo-img">
+        </div>
+        <div class="artigo-content-wrapper">
+          <div class="artigo-tag">Saúde Mental</div>
+          <h3 class="titulo-artigo">Ansiedade: O circuito que não repousa</h3>
+          <p class="conteudo-artigo">Há um lugar de silêncio e quietude além do físico. Mas, para algumas pessoas, esse lugar não é facilmente acessado. A mente não descansa...</p> 
+          <button class="leia-mais-btn" data-artigo="artigo9">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        </div>
       </div>
+      
       <div class="card-artigo">
-        <div class="artigo-tag">Reflexão</div>
-        <h3 class="titulo-artigo">Você não está sem tempo</h3>
-        <p class="conteudo-artigo">Você não está sem tempo. Você está vivendo rápido demais. O tempo não passa rápido. Ele é que está sendo mal vivido. A pressa parece eficiência. Mas, na verdade, é perda...</p> 
-        <button class="leia-mais-btn" data-artigo="artigo10">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        <div class="artigo-img-wrapper">
+          <img src="./img/fotoOlhandoGarrafa.jpeg" alt="Falta de tempo" class="artigo-img">
+        </div>
+        <div class="artigo-content-wrapper">
+          <div class="artigo-tag">Reflexão</div>
+          <h3 class="titulo-artigo">Você não está sem tempo</h3>
+          <p class="conteudo-artigo">Você não está sem tempo. Você está vivendo rápido demais. O tempo não passa rápido. Ele é que está sendo mal vivido. A pressa parece eficiência...</p> 
+          <button class="leia-mais-btn" data-artigo="artigo10">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        </div>
       </div>
+      
       <div class="card-artigo">
-        <div class="artigo-tag">Saúde Mental</div>
-        <h3 class="titulo-artigo">Estresse, Ideal e Exaustão Psíquica</h3>
-        <p class="conteudo-artigo">Em muitos momentos, o seu cansaço não vem apenas do que você faz. Ele vem da sensação de que, mesmo fazendo muito, ainda não é suficiente. Existe uma ideia — às vezes silenciosa — de como a sua vida deveria estar...</p> 
-        <button class="leia-mais-btn" data-artigo="artigo11">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        <div class="artigo-img-wrapper">
+          <img src="./img/fotoOlhandoPaisagemCidade.jpeg" alt="Exaustão Psíquica" class="artigo-img">
+        </div>
+        <div class="artigo-content-wrapper">
+          <div class="artigo-tag">Saúde Mental</div>
+          <h3 class="titulo-artigo">Estresse, Ideal e Exaustão Psíquica</h3>
+          <p class="conteudo-artigo">Em muitos momentos, o seu cansaço não vem apenas do que você faz. Ele vem da sensação de que, mesmo fazendo muito, ainda não é suficiente...</p> 
+          <button class="leia-mais-btn" data-artigo="artigo11">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        </div>
       </div>
+
+      <div class="card-artigo">
+        <div class="artigo-img-wrapper">
+          <img src="./img/fotoMenteAlerta.png" alt="O Silêncio" class="artigo-img">
+        </div>
+        <div class="artigo-content-wrapper">
+  <div class="artigo-tag">Ansiedade</div>
+  <h3 class="titulo-artigo">Ansiedade: O estado de vigilância contínua</h3>
+  <p class="conteudo-artigo">O pior da ansiedade não é apenas o medo, é o estado de hipervigilância. Um desassossego desconfortável que acompanha continuamente a mente...</p> 
+  <button class="leia-mais-btn" data-artigo="artigo12">Leia o artigo completo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+</div>
+      </div>
+
     </div>
   </div>
 
-  <!-- Modal -->
   <div id="modal-artigo" class="modal">
     <div class="modal-backdrop"></div>
     <div class="modal-content">
       <button class="close-btn" aria-label="Fechar">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </button>
+      <img id="modal-img" class="modal-img-display" src="" alt="Imagem Ilustrativa" style="display:none;">
       <div class="modal-tag" id="modal-tag"></div>
       <h2 id="modal-titulo"></h2>
       <div class="modal-divider"></div>
@@ -1262,7 +1371,6 @@ nav { flex:1; display:flex; justify-content:center; }
   </div>
 </section>
 
-<!-- ══ LOCALIZAÇÃO ══ -->
 <section id="localizacao" class="localizacao-section">
   <div class="container">
     <div class="localizacao-grid">
@@ -1283,13 +1391,11 @@ nav { flex:1; display:flex; justify-content:center; }
             <div><strong>Horário de Atendimento</strong><span>Segunda a Sexta, 8h às 18h</span></div>
           </div>
         </div>
-        <!-- único botão CTA nesta seção -->
         <a href="https://wa.me/5512988106070" target="_blank" rel="noopener" class="btn-primary">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           Agendar pelo WhatsApp
         </a>
       </div>
-      <!-- MAPA FUNCIONAL -->
       <div class="loc-mapa">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3667.376674121206!2d-45.90210692485418!3d-23.192939479054687!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cc4a0bfa29b6b7%3A0xddc0e5d2a2c6209b!2sAv.%20Anchieta%2C%20585%20-%20Jardim%20Nova%20America%2C%20S%C3%A3o%20Jos%C3%A9%20dos%20Campos%20-%20SP%2C%2012242-280!5e0!3m2!1spt-BR!2sbr!4v1726603734873!5m2!1spt-BR!2sbr"
@@ -1306,7 +1412,6 @@ nav { flex:1; display:flex; justify-content:center; }
   </div>
 </section>
 
-<!-- ══ FOOTER — limpo, sem logo, sem botão extra ══ -->
 <footer class="footer">
   <div class="footer-main">
     <div class="footer-brand">
@@ -1336,7 +1441,6 @@ nav { flex:1; display:flex; justify-content:center; }
   </div>
 </footer>
 
-<!-- WhatsApp flutuante -->
 <a href="https://wa.me/5512988106070" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Falar pelo WhatsApp">
   <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
@@ -1347,57 +1451,74 @@ const artigos = {
   artigo1: {
     tag:"Filosofia de vida", autor:"Wilfredo Finck Júnior",
     titulo:"A Jornada Invisível da Evolução",
-    texto:`Na existência, não há derrotas — há apenas etapas. Cada uma nos molda de maneira única, revelando-se não como sofrimento, mas como amadurecimento. A vida, em sua sabedoria silenciosa, nunca age por acaso. Tudo o que vivemos tem um propósito, ainda que nossa consciência presente não consiga alcançá-lo.\n\nA dor de hoje, com o tempo, revela-se como um portal necessário para a expansão da alma. São experiências que nos retiram da zona de conforto e nos empurram para versões mais inteiras de nós mesmos. E nesse caminhar, o mais valioso não é o quanto acumulamos ou conquistamos, mas as marcas que deixamos — não apenas em nossa história, mas na história daqueles que cruzam nosso caminho.\n\nEssa é a verdadeira semente da existência: o impacto que geramos no outro. A vida é um processo de semeadura invisível, onde cada gesto de amor, compreensão e presença constrói a ponte para a nossa própria evolução.\n\nSomos mais que corpos em trânsito pelo tempo. Somos consciências em constante expansão — seres em evolução psíquica, espiritual e emocional. O físico envelhece, sim, mas o espírito amadurece.\n\nSomos apenas sopros navegando no oceano do tempo. E, mesmo sem entender agora, cada ato, cada escolha, cada dor e cada encontro tem um sentido maior, que se revelará no tempo certo.`
+    imagem: "./img/fotoOlhandoPaisagem.jpeg",
+    texto:`Na existência, não há derrotas — há apenas etapas. Cada uma nos molda de maneira única, revelando-se não como sofrimento, mas como amadurecimento. A vida, em sua sabedoria silenciosa, nunca age por acaso. Tudo o que vivemos tem um propósito, ainda que nossa consciência presente não consiga alcançá-lo.\n\nA dor de hoje, com o tempo, revela-se como um portal necessário para a expansão da alma. São experiências que nos retiram da zona de conforto e nos empurram para versões mais inteiras de nós mesmos. E nesse caminhar, o mais valioso não é o quanto acumulamos ou conquistamos, mas as marcas que deixamos — não apenas em nossa história, mas na história daqueles que cruzam nosso caminho.\n\nEssa é a verdadeira semente da existência: o impacto que geramos no outro. A vida é um processo de semeadura invisível, onde cada gesture de amor, compreensão e presença constrói a ponte para a nossa própria evolução.\n\nSomos mais que corpos em trânsito pelo tempo. Somos consciências em constante expansão — seres em evolução psíquica, espiritual e emocional. O físico envelhece, sim, mas o espírito amadurece.\n\nSomos apenas sopros navegando no oceano do tempo. E, mesmo sem entender agora, cada ato, cada escolha, cada dor e cada encontro tem um sentido maior, que se revelará no tempo certo.`
   },
   artigo2: {
     tag:"Saúde Mental", autor:"Wilfredo Finck Júnior",
     titulo:"Depressão",
+    imagem: "./img/fotoPensamentoBaguncado.jpeg",
     texto:`Uma tristeza inexplicável, a melancolia da alma, uma sensação de vazio interior e desesperança, juntamente com a falta de energia e prazer pelas coisas que outrora eram prazerosas. Parece que tudo perde a graça e o sabor, o sono torna-se fragmentado e não restaurador.\n\nA percepção do mundo torna-se angustiada e triste, associada a uma adinamia e baixa autoestima. A desesperança agrava a dor emocional e um contínuo desejo de chorar. O brilho da vida torna-se fosco e cinzento.\n\nMuitos resistem em procurar um médico de saúde mental, um preconceito vinculado à ideia de fraqueza pessoal ou medo de estigmatização social ou profissional. Muitos sofrem demasiado e desnecessariamente por muito tempo.\n\nA ciência já comprova a existência da doença depressiva e a necessidade de um bom diagnóstico e tratamento.\n\nProcure ajuda e apoio em um médico de saúde mental.`
   },
   artigo3: {
     tag:"Bem-estar", autor:"Wilfredo Finck Júnior",
     titulo:"O Tempo",
+    imagem: "./img/fotoOlhandoPaisagemCidade.jpeg",
     texto:`O sorriso de hoje não volta mais! A boa conversa, a que vale a pena, é única! O afeto dos momentos com os bons amigos e a família, são únicos! Cada dia e momento são únicos!\n\nEntão devemos aproveitar a oportunidade, pois não voltará. O ar que respiramos hoje e a saúde de nossa energia, amanhã pode não existir! Se temos um momento nosso, livre de trabalho e preocupações, devemos usufruí-lo ao máximo.\n\nA vida é um sopro de viagem, uma mala que se desfaz rapidamente e não levamos absolutamente nada. Portanto, devemos carregar menos e curtir mais!\n\nDevemos comer bem, sorrir, agradecer e retribuir! Tomar sol, sentir o vento, observar o balançar das folhas e suas estações — é um presente belo, majestoso, gratuito e gratificante!\n\nUma energia contagiante vem com a contemplação e introspecção da vida real! Um entendimento que deveria ser simples em sua plenitude — algo que passa rápido!`
   },
   artigo4: {
     tag:"Crescimento", autor:"Wilfredo Finck Júnior",
     titulo:"Gratidão",
+    imagem: "./img/fotoRespiroCalmo.jpeg",
     texto:`Os valores da vida são pouco observados, sobretudo, quando nos chegam de forma facilitada. Quando nascemos e vivemos num universo blindado de problemas, não compreendemos as reais dores da vida.\n\nEsta luta não gera apenas sabor, mas sobretudo, resistência às frustrações e desapontamentos com a vida. Forjamos a têmpera necessária para os desafios que estão por vir.\n\nA gratidão é o sentimento fundamental na caminhada, a satisfação e sabor por aquilo que temos em cada momento da jornada, é a força que aplaca os momentos de fragilidade.\n\nA gratidão é a dádiva da vida que nos proporciona felicidade. É o valor do nosso momento existencial, o sentimento de celebrar a vida e novamente agradecer.\n\nÉ o grande valor da vida — GRATIDÃO!`
   },
   artigo5: {
     tag:"Reflexão", autor:"Wilfredo Finck Júnior",
     titulo:"A Reconquista do Valor Interno",
+    imagem: "./img/fotoEvolucaoInt.jpeg",
     texto:`O ser humano não nasceu para ser medido, mas para ser vivido.\n\nHouve um tempo em que a existência era direta: o corpo sentia o frio e a roupa era abrigo; a fome surgia e o alimento era sustento. A vida não precisava de plateia, apenas de presença. No entanto, de forma silenciosa e progressiva, algo começou a se deslocar.\n\nO olhar do outro passou a ocupar o lugar da própria consciência. O valor deixou de ser sentido e passou a ser atribuído, enquanto a identidade deixou de ser descoberta para ser construída externamente. Nesse movimento, quase imperceptível, o ser humano começou a se afastar de si.\n\nPassou a se vestir não apenas para proteger o corpo, mas para sustentar uma imagem. A falar não necessariamente para expressar a verdade, mas para garantir aceitação. E, pouco a pouco, a viver não para experienciar, mas para ser percebido.\n\nAo fazer isso, terceirizou aquilo que jamais poderia ser delegado: o próprio valor.\n\nHoje, muitos já não sabem quem são sem o reflexo do outro. Sentem-se importantes quando vistos e invisíveis quando esquecidos, oscilando entre validação e vazio como se a própria existência dependesse de confirmação externa.\n\nAinda assim, há algo que permanece intacto, mesmo que esquecido: o eixo interno. Um lugar onde o valor não é negociado, nem comparado, nem concedido — ele simplesmente é.\n\nReconquistar esse eixo não exige abandonar o mundo, mas reposicionar-se dentro dele. Significa poder ser reconhecido sem depender disso para existir, possuir sem ser possuído e viver sem precisar sustentar constantemente uma imagem.\n\nA felicidade que depende do mundo oscila; a que nasce do eixo interno permanece. E esse retorno não é um luxo espiritual, mas uma necessidade psíquica, um ato de saúde e, sobretudo, um resgate de identidade.`
   },
   artigo6: {
     tag:"Saúde Mental", autor:"Wilfredo Finck Júnior",
     titulo:"A Arte de Contemplar",
+    imagem: "./img/fotoPensamentoBaguncado.jpeg",
     texto:`Contemplar não é só olhar.\n\nÉ parar.\nÉ sair, por um instante, da pressa e da lógica do dia a dia.\n\nÉ olhar sem querer resolver, entender ou usar.\n\nE, nesse momento, algo muda.\n\nA mente desacelera.\nO controle diminui.\nE começam a surgir imagens, lembranças, sensações.\n\nComo um sonho leve — acordado.\n\nVocê observa.\nMas não tenta comandar.\n\nE então, volta.\n\nMas volta diferente.\n\nCom algo difícil de explicar:\numa sensação, uma imagem, um sentimento sem nome.\n\nNem tudo precisa ser entendido.\n\nA contemplação não é fuga.\nÉ contato.\n\nÉ quando você sai do automático\ne se aproxima de si mesmo.\n\nPor alguns instantes, o tempo muda.\nPassado, presente e futuro se misturam.\n\nE algo dentro de você se reorganiza.\n\nIdeias surgem.\nDesejos aparecem.\nCaminhos começam a se desenhar.\n\nA natureza ajuda.\nMas não é só sobre ela.\n\nÉ sobre o que ela desperta em você.\n\nContemplar é isso:\n\nparar de fazer\ne começar a perceber.\n\nÉ quando você deixa de funcionar\ne volta a sentir.\n\nE, por um instante,\nse lembra de quem é.`
   },
   artigo7: {
     tag:"Relacionamentos", autor:"Wilfredo Finck Júnior",
-    titulo:"O que sustenta uma vida em comum ",
+    titulo:"O que sustenta uma vida em comum",
+    imagem: "./img/fotoOlhandoGarrafa.jpeg",
     texto:`Amor, humildade e perdão\n\nMais do que virtudes, são fundamentos silenciosos da vida em comum.\n\nSustentam aquilo que não aparece, mas determina a qualidade das relações: a forma como escutamos, reagimos, julgamos e nos aproximamos uns dos outros.\n\nQuando permanecem apenas como ideias, pouco transformam.\nMas, quando começam a ser vividos — mesmo de forma imperfeita — tornam-se forças reais. Passam a organizar a maneira como pensamos, sentimos e nos relacionamos.\n\nO amor não é apenas afeto.\nÉ a disposição de reconhecer o outro como alguém que importa, mesmo quando é difícil.\n\nA humildade não é diminuição de si.\nÉ a capacidade de não se colocar sempre no centro — de abrir espaço para o outro, para o erro e para o aprendizado.\n\nO perdão não é esquecimento nem fraqueza.\nÉ a escolha de não permanecer preso ao que feriu, permitindo que a vida siga sem repetir o mesmo ciclo.\n\nSem esses três elementos, a convivência se desgasta.\nO julgamento se intensifica, os conflitos se acumulam e as relações se tornam mais duras, defensivas e distantes.\n\nCom eles, algo muda.\n\nHá mais escuta.\nMais flexibilidade.\nMais possibilidade de recomeço.\n\nNão se trata de um ideal distante, reservado a poucos.\nÉ uma prática cotidiana, feita em pequenos gestos: na forma como respondemos, como olhamos e como lidamos com as falhas — nossas e dos outros.\n\nEsses fundamentos não transformam o mundo de forma imediata e visível.\nMas transformam o modo como o mundo é vivido.\n\nE isso muda tudo.\n\nO mundo não se transforma primeiro nas instituições.\nEle se reorganiza dentro das pessoas — e só depois se reflete fora.`
   },
   artigo8: {
     tag:"Dependência Química", autor:"Wilfredo Finck Júnior",
     titulo:"Alcoolismo: Quando o Alívio Vira Dependência",
+    imagem: "./img/fotoOlhandoGarrafa.jpeg",
     texto:`Raramente o álcool entra na vida de alguém como problema. Ele chega como resposta — não como prazer, mas como alívio. Antes de ser dependência, costuma parecer solução.\n\nO álcool acalma o que a pessoa ainda não sabe acalmar. Silencia o que não encontra palavras. Diminui a intensidade de sentimentos que parecem grandes demais para serem sustentados: ansiedade, vergonha, solidão, tensão, vazio.\n\nO álcool não elimina o sofrimento — apenas o afasta por algumas horas. A mente desacelera, o corpo relaxa e a pressão interna diminui. Mas o que incomoda não desaparece — retorna depois, muitas vezes com mais intensidade.\n\nMas há um ponto silencioso de mudança. Com o tempo, o álcool deixa de ser apenas um recurso e passa a ocupar um lugar central. A pessoa começa a depender dele para relaxar, conversar e se sentir à vontade. Situações que antes eram naturais passam a exigir esse “apoio”. Sem perceber, o que era ajuda começa a limitar.\n\nO alívio deixa de ser ocasional e passa a ser esperado. A mente aprende rápido que existe um atalho para se sentir melhor. E, nesse momento, algo muda.\n\nO corpo se acostuma. É preciso mais para sentir o mesmo efeito. O intervalo entre os usos diminui. Quando não há álcool, o desconforto aparece com mais força. O que antes parecia aliviar começa, aos poucos, a piorar o que a pessoa sente.\n\nA ansiedade aumenta. O humor oscila. O sono piora. O corpo passa a pedir repetição — não só pelo prazer, mas para tentar voltar a um estado que agora depende do álcool.\n\nJá não se bebe apenas para aliviar o que existe — bebe-se também para conter o que o próprio uso passou a causar. O ciclo se fecha de forma quase imperceptível: beber para aliviar → aliviar → piorar → precisar beber.\n\nNesse ponto, a liberdade já não é a mesma, ainda que nem sempre isso esteja claro.\n\nO álcool, que começou como uma forma de aliviar o que era difícil, passa a ocupar esse espaço. Com o tempo, a pessoa deixa de conseguir relaxar, conversar ou se sentir bem sem ele. As relações mudam, a espontaneidade diminui e tudo começa a depender desse uso.\n\nO álcool não começa como vício. Começa como tentativa: acalmar, aproximar, esquecer, continuar. Mas, quando se torna a única forma de se sentir bem, deixa de ser alívio — e passa a ser dependência.\n\nTalvez por isso, tratar o uso apenas como falta de força de vontade empobreça a compreensão. Antes de ser dependência, o álcool foi, em algum momento, a melhor saída encontrada. E é justamente por ter funcionado que ele pode, depois, aprisionar.\n\nO cuidado começa quando novas formas de viver e sentir ganham força — quando o alívio deixa de depender do álcool. Aos poucos, a pessoa passa a enfrentar melhor o que sente — como ansiedade, desconforto e insegurança.\n\nO álcool pode aliviar no começo, mas com o tempo passa a piorar o problema. Por isso, o caminho é aprender outras formas de enfrentar o que ele apenas escondia.\n\nNo fundo, o álcool não resolve o problema — apenas esconde por um tempo. O que realmente ajuda é aprender outras formas de lidar com o que se sente.`
   },
   artigo9: {
     tag:"Saúde Mental", autor:"Wilfredo Finck Júnior",
     titulo:"Ansiedade: O circuito que não repousa",
+    imagem: "./img/fotoPensamentoBaguncado.jpeg",
     texto:`Há um lugar de silêncio e quietude além do físico. Mas, para algumas pessoas, esse lugar não é facilmente acessado.\n\nA mente não descansa. Mesmo em ambientes tranquilos, permanece ativa, em estado contínuo de vigilância. Os pensamentos não param. Um puxa o outro até virar excesso. O que antes era natural passa a incomodar — um ruído interno constante e cansativo.\n\nAmbientes agradáveis podem trazer conforto, mas não garantem repouso mental. O silêncio pode existir fora, mas não dentro. Forma-se, assim, um circuito que não repousa.\n\nComo a ansiedade se manifesta\n\nA ansiedade não é apenas nervosismo. Ela envolve corpo, pensamento e percepção do futuro.\n\nA mente passa a viver no futuro, quase sempre antecipando o pior: “E se der errado?”, “E se eu não conseguir?”. Essa tentativa de prever e controlar cria um estado contínuo de tensão.\n\nOs pensamentos se repetem, giram em torno dos mesmos temas, sem conclusão. A pessoa pensa muito, mas não resolve — e quanto mais pensa, mais se prende.\n\nSurge uma sensação constante de alerta, mesmo sem perigo real. Relaxar se torna difícil. O futuro passa a ser percebido como ameaça, e não como possibilidade.\n\nAnsiedade, fobia e pânico\n\nA ansiedade é uma resposta natural do corpo. O problema surge quando esse sistema permanece ativado sem necessidade.\n\nNo transtorno fóbico, o medo se concentra em situações específicas, como elevador, avião ou altura, desencadeando sintomas físicos como palpitações, falta de ar, sudorese, formigamento e desconforto no peito, o que leva à evitação.\n\nNa síndrome do pânico, sem um fator específico, ocorrem crises repentinas e intensas, com sintomas físicos marcantes como falta de ar, palpitações, desconforto no peito e sensação de perda de controle.\n\nEm comum, esses quadros refletem um sistema de alerta que não consegue desligar.\n\nCaminho possível\n\nNão se trata de eliminar pensamentos, mas de reduzir a vigilância constante e permitir, aos poucos, que a mente descanse.`
   },
   artigo10: {
     tag:"Reflexão", autor:"Wilfredo Finck Júnior",
     titulo:"Você não está sem tempo",
+    imagem: "./img/fotoOlhandoGarrafa.jpeg",
     texto:`Você não está sem tempo.\nVocê está vivendo rápido demais.\n\nO tempo não passa rápido.\nEle é que está sendo mal vivido.\n\nA pressa parece eficiência.\nMas, na verdade, é perda.\n\nQuando você vive só para chegar,\ndeixa de viver o caminho.\n\nE algo começa a faltar.\n\nA mente corre para o futuro.\nSempre para o próximo passo.\nPara o que ainda não aconteceu.\n\nMas o preço disso é alto.\n\nO cérebro antecipa tanto\nque “gasta” o prazer antes da hora.\n\nQuando o momento chega,\nele já perdeu intensidade.\n\nDura pouco.\nSatisfaz pouco.\n\nE logo vem a necessidade de mais.\n\nMais estímulo.\nMais movimento.\nMais pressa.\n\nUm ciclo que nunca descansa.\n\nA dopamina te faz querer chegar.\n\nMas a vida não está no “chegar”.\n\nEstá no que acontece enquanto você está indo.\n\nA pressa encurta a experiência.\nA presença aprofunda.\n\nO prazer verdadeiro não está na antecipação.\n\nEstá na capacidade de permanecer.\n\nDe sentir.\nDe sustentar o instante.\n\nDe não correr.\n\nPorque, no fim,\n\nnão é o tempo que falta.\n\nÉ presença.\n\nA dopamina quer chegar.\nA vida quer acontecer.\n\nE, quando você só quer chegar,\npara de viver.`
   },
   artigo11: {
     tag:"Saúde Mental", autor:"Wilfredo Finck Júnior",
     titulo:"Estresse, Ideal e Exaustão Psíquica",
+    imagem: "./img/fotoOlhandoPaisagemCidade.jpeg",
     texto:`Em muitos momentos, o seu cansaço não vem apenas do que você faz. Ele vem da sensação de que, mesmo fazendo muito, ainda não é suficiente.\n\nExiste uma ideia — às vezes silenciosa — de como a sua vida deveria estar, e, sem perceber, você passa a se medir por ela. As comparações surgem quase automaticamente, as metas parecem sempre um pouco distantes, e o esforço, por maior que seja, não traz descanso.\n\nIsso não significa fraqueza. Significa que você pode estar tentando sustentar um ideal que não corresponde à sua realidade.\n\nCom o tempo, isso cansa. O corpo sente, a mente insiste, e a sensação de insuficiência se repete.\n\nTalvez o ponto não seja apenas fazer menos ou descansar mais, mas olhar com mais cuidado para aquilo que você está tentando alcançar. De onde vêm essas exigências? Elas são realmente suas?\n\nNa prática, quando começamos a questionar esses ideais, algo muda. A pressão diminui, o esforço encontra um limite mais possível, e a vida deixa de ser uma corrida constante.\n\nNão é sobre desistir. É sobre ajustar a forma de viver ao que é real — e, a partir daí, encontrar um modo mais sustentável de seguir.`
+  },
+  artigo12: {
+    tag:"Ansiedade", autor:"Wilfredo Finck Júnior",
+    titulo:"Ansiedade: O estado de vigilância contínua",
+    imagem: "./img/fotoMenteAlerta.png",
+    texto:`O pior da ansiedade não é apenas o medo, é o estado de hipervigilância.\n\nUm desassossego desconfortável que acompanha continuamente a mente. Uma conexão constante com a possibilidade de que algo possa dar errado mesmo sem evidência concreta.\n\nNão é um pensamento isolado, é um clima interno constante.\n\nA mente entra em um ciclo de pensamentos, e tudo passa a ser feito com excesso de cuidado - não por responsabilidade, mas por preocupação contínua.\n\nA psique permanece em estado de vigilância e defesa, como se houvesse um inimigo invisível, aguardando o momento de atacar ou sabotar.\n\nTorna-se difícil manter a calma, pois os pensamentos confundem, e a razão não é suficiente para sustentar a serenidade.\n\nO sono, que deveria restaurar, fragmenta-se, a mente não se desliga. Acorda-se no meio da noite e, quase imediatamente, a preocupação retorna como um circuito que nunca se interrompe.\n\nE então o corpo reage com: Palpitações, respiração suspirosa, sudorese, tremores, vertigens, frio no estômago, e um desconforto no peito que pode lembrar um problema cardíaco. Ocorre uma sensação difusa de desespero emocional, acompanhada de fadiga, com o corpo inteiro em estado de alerta.\n\nHá três dimensões que se entrelaçam nessa experiência:\n\n1. Biológica \nO organismo encontra-se hiperativado e estruturas do cérebro operam como um detector de ameaça constantemente acionado, liberando hormônios do estresse. O corpo não está imaginando, ele está reagindo. As palpitações, o suor, o tremor - tudo isso é expressão de uma descarga autonômica real, como se o perigo estivesse presente, mesmo quando não está.\n\n2. Cognitiva \nA mente passa a funcionar em modo de antecipação e o pensamento não descansa, ele projeta continuamente a ideia: E se acontecer?, E se der errado?. Portanto, pensar sem parar mantém tudo ativo. E pensar demais não traz clareza, mas limitação e sofrimento.\n\n3. Existencial \nTalvez a parte mais profunda e silenciosa, ocorre quando surge uma sensação difícil de explicar, como se algo não estivesse bem. O mundo começa a ser visto como ameaça, e a confiança na vida se fragiliza. Não é apenas medo de algo específico, mas, a perda da sensação de segurança no próprio existir.\n\nA ansiedade, nesse nível, deixa de ser um sintoma isolado, tornando-se um estado, um modo de estar no mundo onde o corpo vigia, a mente antecipa e a existência perde qualidade.\n\nE talvez o ponto mais importante seja este: não se trata de fraqueza, nem de falta de controle, o que um dia foi proteção, quando permanece continuamente ativado, passa a limitar a qualidade de vida.`
   }
 };
 
@@ -1437,15 +1558,27 @@ const modalTag   = document.getElementById('modal-tag');
 const modalTitle = document.getElementById('modal-titulo');
 const modalText  = document.getElementById('modal-texto');
 const modalAutor = document.getElementById('modal-autor');
+const modalImg   = document.getElementById('modal-img');
 
 document.querySelectorAll('.leia-mais-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const art = artigos[btn.dataset.artigo];
     if (!art) return;
+    
+    // Alimenta o modal com os dados
     modalTag.textContent   = art.tag;
     modalTitle.textContent = art.titulo;
     modalText.textContent  = art.texto;
     modalAutor.textContent = `— ${art.autor}`;
+    
+    // Lida com a imagem do modal
+    if(art.imagem) {
+      modalImg.src = art.imagem;
+      modalImg.style.display = 'block';
+    } else {
+      modalImg.style.display = 'none';
+    }
+    
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
   });
@@ -1454,6 +1587,8 @@ document.querySelectorAll('.leia-mais-btn').forEach(btn => {
 function closeModal() {
   modal.classList.remove('open');
   document.body.style.overflow = '';
+  // Pequeno delay para a imagem não sumir abruptamente durante a animação de fechar
+  setTimeout(() => { modalImg.src = ''; }, 300);
 }
 document.querySelector('.close-btn').addEventListener('click', closeModal);
 document.querySelector('.modal-backdrop').addEventListener('click', closeModal);
