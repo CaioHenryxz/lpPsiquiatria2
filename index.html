@@ -338,7 +338,7 @@ nav { flex:1; display:flex; justify-content:center; }
   margin-bottom: 34px;
   max-width: 500px;
 }
-.hero-actions { display:none; gap:14px; flex-wrap:wrap; }
+.hero-actions { display:flex; gap:14px; flex-wrap:wrap; }
 
 /* Stats bar */
 .hero-stats {
@@ -929,6 +929,26 @@ nav { flex:1; display:flex; justify-content:center; }
   .localizacao-grid { grid-template-columns:1fr; }
   .loc-mapa { border-radius:var(--radius-xl); min-height:380px; }
   .loc-mapa iframe { min-height:380px; }
+}
+@media (max-width: 480px) {
+  .hero-title { font-size:2.3rem; }
+  .stat-num { font-size:1.55rem; }
+  .trat-card { height:300px; }
+  .artigo-img-wrapper { height: 180px; }
+  .modal-img-display { height: 200px; }
+
+  /* --- CORREÇÃO DO BOTÃO FECHAR (MODAL) NO CELULAR --- */
+  .modal-content { 
+    padding: 58px 22px 28px; 
+  }
+  .close-btn {
+    top: 12px;
+    right: 12px;
+    background: var(--teal-900); 
+    border: 1px solid rgba(126, 211, 200, 0); 
+    opacity: 1;
+    z-index: 99;
+  }
 }
 
 @media (max-width: 768px) {
